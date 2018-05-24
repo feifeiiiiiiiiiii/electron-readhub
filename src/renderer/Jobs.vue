@@ -15,6 +15,10 @@
                   <span class="pubdate">{{item.publishDate | formatDate}}</span>
                 </span>
               </div>
+              <div class="box-content">
+                <p class="box-desc">{{item | fromatDesc}}</p>
+                <p>{{item | formatBody}}</p>
+              </div>
             </el-card>
           </template>
         </el-row>
@@ -33,6 +37,7 @@ import moment from 'moment'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import { shell } from 'electron'
+import _ from 'lodash'
 
 import ReadhubClient from './clients/readhub'
 
@@ -69,8 +74,22 @@ export default {
     }
   },
   filters: {
+    fromatDesc (item) {
+      let jobs = []
+
+      _.each(item.jobsArray, function (o) {
+        jobs.push(o.title)
+      })
+      return jobs.join(' · ')
+    },
     formatDate (date) {
       return moment(date).fromNow()
+    },
+    formatBody (item) {
+      let str = ''
+      str = str + _.keys(item.cities).join('、') + `等地共更新了${item.jobCount}职位，`
+      str = str + `待遇集中在${item.salaryLower}-${item.salaryUpper}k，一般要求${item.experienceLower}-${item.experienceUpper}年经验`
+      return str
     }
   },
   mounted () {
@@ -112,12 +131,12 @@ export default {
       color: #909399;
     }
     .box-content {
-        p {
-            color: #409eff;
-            text-decoration: none;
-            font-size: 14px;
-            cursor: pointer;
-        }
+      .box-desc {
+        color: #909399;
+      }
+      p {
+        font-size: 14px;
+      }
     }
     margin-bottom: 16px;
   }
