@@ -19,6 +19,8 @@
                 <p class="box-desc">{{item | fromatDesc}}</p>
                 <p>{{item | formatBody}}</p>
               </div>
+              <div>
+              </div>
             </el-card>
           </template>
         </el-row>
@@ -36,6 +38,7 @@
 import moment from 'moment'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
+import RChart from './components/RChart'
 import { shell } from 'electron'
 import _ from 'lodash'
 
@@ -44,7 +47,8 @@ import ReadhubClient from './clients/readhub'
 export default {
   components: {
     Sidebar,
-    Header
+    Header,
+    RChart
   },
   data () {
     return {
