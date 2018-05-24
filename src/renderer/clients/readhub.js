@@ -8,4 +8,20 @@ export default class ReadhubClient {
     const url = `${this.prefix}/topic`
     return axios.get(url, { params })
   }
+  news (params) {
+    const url = `${this.prefix}/news`
+    return axios.get(url, { params })
+  }
+  technews (params) {
+    const url = `${this.prefix}/technews`
+    return axios.get(url, { params })
+  }
+  blockchain (params) {
+    const url = `${this.prefix}/blockchain`
+    return axios.get(url, { params })
+  }
+  jobs (params) {
+    const url = `${this.prefix}/jobs`
+    return axios.get(url, { params })
+  }
 }

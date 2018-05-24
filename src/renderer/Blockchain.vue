@@ -3,11 +3,11 @@
     <Header></Header>
 		<el-col :span="24" class="main">
       <aside>
-        <sidebar selected="topic"></sidebar>
+        <sidebar selected="blockchain"></sidebar>
       </aside>
 			<section class="content-container">
         <el-row>
-          <template v-for="item in topics">
+          <template v-for="item in news">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>
@@ -16,7 +16,7 @@
                 </span>
               </div>
               <div class="box-content">
-                <p>{{item.summary}}</p>
+                <p @click=openUrl(item.url)>{{item.summary}}</p>
               </div>
             </el-card>
           </template>
@@ -35,6 +35,7 @@
 import moment from 'moment'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
+import { shell } from 'electron'
 
 import ReadhubClient from './clients/readhub'
 
@@ -47,7 +48,7 @@ export default {
     return {
       client: new ReadhubClient(),
       sysName: 'Readhub',
-      topics: [],
+      news: [],
       total: 0,
       pageNum: 1,
       params: {
@@ -57,13 +58,16 @@ export default {
     }
   },
   methods: {
+    openUrl (url) {
+      shell.openExternal(url)
+    },
     nextPage () {
-      const len = this.topics.length - 1
+      const len = this.news.length - 1
       if (len <= 0) return
-      this.params.lastCursor = this.topics[len].order
+      this.params.lastCursor = moment(this.news[len].publishDate).unix() * 1000
 
-      this.client.topics(this.params).then((res) => {
-        this.topics = this.topics.concat(res.data.data)
+      this.client.blockchain(this.params).then((res) => {
+        this.news = this.news.concat(res.data.data)
       })
     }
   },
@@ -73,8 +77,8 @@ export default {
     }
   },
   mounted () {
-    this.client.topics(this.params).then((res) => {
-      this.topics = res.data.data
+    this.client.blockchain(this.params).then((res) => {
+      this.news = res.data.data
     })
   }
 }
@@ -111,8 +115,12 @@ export default {
       color: #909399;
     }
     .box-content {
-      font-size: 14px;
-      color: #737373;
+        p {
+            color: #409eff;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
     }
     margin-bottom: 16px;
   }
