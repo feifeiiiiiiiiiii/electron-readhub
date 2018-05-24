@@ -16,8 +16,9 @@ function createWindow () {
     width: 800,
     title: 'Readhub',
     autoHideMenuBar: true,
+    movable: true,
     show: false,
-    frame: false
+    frame: true
   })
 
   mainWindow.loadURL(winURL)
