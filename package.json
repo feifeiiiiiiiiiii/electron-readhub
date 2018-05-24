@@ -1,8 +1,8 @@
 {
-  "name": "surfbird",
+  "name": "readhub",
   "version": "0.0.0",
-  "author": "Andreas N. <git@pixelde.su>",
-  "description": "A Twitter client built on Electron and Vue",
+  "author": "qinpengfei@jd.com",
+  "description": "A Readhub client built on Electron and Vue & base https://github.com/SimulatedGREG/electron-vue",
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "postinstall": "npm run lint:fix && opencollective postinstall"
   },
   "build": {
-    "productName": "surfbird",
+    "productName": "Readhub",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"
@@ -122,10 +122,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/surfbird",
-    "logo": "https://opencollective.com/opencollective/logo.txt"
   }
 }
