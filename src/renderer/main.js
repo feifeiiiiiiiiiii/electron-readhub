@@ -6,13 +6,13 @@ import 'normalize.css/normalize.css'
 import 'loaders.css/loaders.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import ECharts from 'vue-echarts/components/ECharts'
+import echarts from 'echarts'
 import App from '../App'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Electron)
-Vue.component('chart', ECharts)
+Vue.prototype.$echarts = echarts
 
 const router = new VueRouter({
   routes

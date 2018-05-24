@@ -19,7 +19,7 @@ let routes = [ {
 }, {
   path: '/blockchain',
   component: BlockchainView,
-  name: 'tech'
+  name: 'blockchain'
 }, {
   path: '/jobs',
   component: JobsView,
