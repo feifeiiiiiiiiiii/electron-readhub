@@ -26,16 +26,28 @@
                       <span class="company">{{item2.company}}</span>
                       <div class="meta">
                         <span class="salary">
-                          <template v-if="item2.salaryLower > 0 || item2.salaryUpper > 0">
+                          <template v-if="item2.salaryLower > 0 && item2.salaryUpper == item2.salaryLower">
+                            {{item2.salaryUpper}}k
+                          </template>
+                          <template v-else-if="item2.salaryLower > 0 && item2.salaryUpper > 0">
                             {{item2.salaryLower}}-{{item2.salaryUpper}}k
+                          </template>
+                          <template v-else-if="item2.salaryUpper <= 0 && item2.salaryLower > 0">
+                            {{item2.salaryLower}}k+
                           </template>
                           <template v-else>
                             面议
                           </template>
                         </span>
                         <span class="experience">
-                          <template v-if="item2.experienceLower > 0 || item2.experienceUpper > 0">
+                           <template v-if="item2.experienceLower > 0 && item2.experienceUpper == item2.experienceLower">
+                           {{item2.experienceUpper}} 年
+                          </template>
+                          <template v-else-if="item2.experienceLower > 0 && item2.experienceUpper > 0">
                           {{item2.experienceLower}}-{{item2.experienceUpper}} 年
+                          </template>
+                          <template v-else-if="item2.experienceUpper <= 0 && item2.experienceLower > 0">
+                          {{item2.experienceLower}} 年+
                           </template>
                           <template v-else>
                             不限
