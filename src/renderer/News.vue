@@ -16,7 +16,15 @@
                 </span>
               </div>
               <div class="box-content">
-                <p @click=openUrl(item.url)>{{item.summary}}</p>
+                <p>{{item.summary}}</p>
+              </div>
+              <div class="box-source">
+                <p @click=openUrl(item.url)>{{item.siteName}}
+                  <template v-if="item.authorName">
+                    &nbsp;&nbsp;/&nbsp;&nbsp;
+                    {{item.authorName}}
+                  </template>
+                </p>
               </div>
             </el-card>
           </template>
@@ -85,44 +93,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  width: 100%;
-  .main {
-    display: flex;
-    position: absolute;
-    top: 60px;
-    bottom: 0px;
-    overflow: hidden;
-    aside {
-      background-color: rgb(84, 92, 100);
-      .el-menu {
-        height: 100%;
-      }
-    }
-    .content-container {
-      background-color: #ebedf1;
-      flex: 1;
-      overflow-y: scroll;
-      padding: 20px;
-    }
-  }
-  .box-card {
-    .pubdate {
-      font-size: 14px;
-      color: #909399;
-    }
-    .box-content {
-        p {
-            color: #409eff;
-            text-decoration: none;
-            font-size: 14px;
-            cursor: pointer;
-        }
-    }
-    margin-bottom: 16px;
-  }
-}
 </style>

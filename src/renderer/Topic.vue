@@ -18,6 +18,14 @@
               <div class="box-content">
                 <p>{{item.summary}}</p>
               </div>
+              <div class="box-source">
+              <template v-for="item2 in item.newsArray">
+                  <li>
+                    <span class="title" @click="openUrl(item2.url)">{{item2.title}}</span>
+                    <span class="source" @click="openUrl(item2.url)">{{item2.siteName}}</span>
+                  </li>
+              </template>
+              </div>
             </el-card>
           </template>
         </el-row>
@@ -37,6 +45,7 @@ import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 
 import ReadhubClient from './clients/readhub'
+import { shell } from 'electron'
 
 export default {
   components: {
@@ -65,6 +74,9 @@ export default {
       this.client.topics(this.params).then((res) => {
         this.topics = this.topics.concat(res.data.data)
       })
+    },
+    openUrl (url) {
+      shell.openExternal(url)
     }
   },
   filters: {
@@ -81,40 +93,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  width: 100%;
-  .main {
-    display: flex;
-    position: absolute;
-    top: 60px;
-    bottom: 0px;
-    overflow: hidden;
-    aside {
-      background-color: rgb(84, 92, 100);
-      .el-menu {
-        height: 100%;
+.box-card {
+  .box-source {
+    li {
+      padding-bottom: 12px;
+      .source {
+        color: #737373;
       }
     }
-    .content-container {
-      background-color: #ebedf1;
-      flex: 1;
-      overflow-y: scroll;
-      padding: 20px;
-    }
-  }
-  .box-card {
-    .pubdate {
-      font-size: 14px;
-      color: #909399;
-    }
-    .box-content {
-      font-size: 14px;
-      color: #737373;
-    }
-    margin-bottom: 16px;
+    font-size: 12px;
+    color: #409eff;
+    cursor: pointer;
   }
 }
 </style>
