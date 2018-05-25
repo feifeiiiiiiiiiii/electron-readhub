@@ -19,7 +19,21 @@
                 <p class="box-desc">{{item | fromatDesc}}</p>
                 <p>{{item | formatBody}}</p>
               </div>
-              <div>
+              <div class="box-source">
+                <template v-for="item2 in item.jobsArray">
+                    <div class="detail">
+                      <span class="job" @click="openUrl(item2.url)">{{item2.title}} </span>
+                      <span class="company">{{item2.company}}</span>
+                      <div class="meta">
+                        <span class="salary">{{item2.salaryLower}}-{{item2.salaryUpper}}k</span>
+                        <span class="experience">{{item2.experienceLower}}-{{item2.experienceUpper}} 年</span>
+                        <span class="location">{{item2.city}}</span>
+                        <span class="origin">{{item2.siteName}}</span></div>
+                    </div>
+                </template>
+              </div>
+              <div class="chart">
+                <chart-item :item="item"></chart-item>
               </div>
             </el-card>
           </template>
@@ -38,7 +52,7 @@
 import moment from 'moment'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
-import RChart from './components/RChart'
+import ChartItem from './components/ChartItem'
 import { shell } from 'electron'
 import _ from 'lodash'
 
@@ -48,7 +62,7 @@ export default {
   components: {
     Sidebar,
     Header,
-    RChart
+    ChartItem
   },
   data () {
     return {
@@ -105,44 +119,41 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  width: 100%;
-  .main {
-    display: flex;
-    position: absolute;
-    top: 60px;
-    bottom: 0px;
-    overflow: hidden;
-    aside {
-      background-color: rgb(84, 92, 100);
-      .el-menu {
-        height: 100%;
+.box-card {
+  .box-source {
+    .detail {
+      padding-top: 8px;
+      .job {
+        cursor: pointer;
+      }
+      .source {
+        color: #737373;
+      }
+      .meta {
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        color: rgba(0,0,0,.5);
+        position: relative;
+        padding-top: 6px;
+        .origin {
+          color: rgba(0,0,0,.5);
+          position: absolute;
+          right: 0;
+        }
+        .salary {
+          color: #d65949;
+          font-size: 15px;
+        }
+        .experience {
+          margin-left: 20px;
+        }
+        .location {
+          margin-left: 20px;
+        }
       }
     }
-    .content-container {
-      background-color: #ebedf1;
-      flex: 1;
-      overflow-y: scroll;
-      padding: 20px;
-    }
-  }
-  .box-card {
-    .pubdate {
-      font-size: 14px;
-      color: #909399;
-    }
-    .box-content {
-      .box-desc {
-        color: #909399;
-      }
-      p {
-        font-size: 14px;
-      }
-    }
-    margin-bottom: 16px;
+    font-size: 12px;
   }
 }
 </style>

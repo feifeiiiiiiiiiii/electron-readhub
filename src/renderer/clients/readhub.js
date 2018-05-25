@@ -24,4 +24,8 @@ export default class ReadhubClient {
     const url = `${this.prefix}/jobs`
     return axios.get(url, { params })
   }
+  chart (jobId) {
+    const url = `${this.prefix}/jobs/${jobId}/chart`
+    return axios.get(url, { })
+  }
 }
