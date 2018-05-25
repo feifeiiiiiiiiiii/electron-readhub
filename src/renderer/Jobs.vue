@@ -25,8 +25,22 @@
                       <span class="job" @click="openUrl(item2.url)">{{item2.title}} </span>
                       <span class="company">{{item2.company}}</span>
                       <div class="meta">
-                        <span class="salary">{{item2.salaryLower}}-{{item2.salaryUpper}}k</span>
-                        <span class="experience">{{item2.experienceLower}}-{{item2.experienceUpper}} 年</span>
+                        <span class="salary">
+                          <template v-if="item2.salaryLower > 0 || item2.salaryUpper > 0">
+                            {{item2.salaryLower}}-{{item2.salaryUpper}}k
+                          </template>
+                          <template v-else>
+                            面议
+                          </template>
+                        </span>
+                        <span class="experience">
+                          <template v-if="item2.experienceLower > 0 || item2.experienceUpper > 0">
+                          {{item2.experienceLower}}-{{item2.experienceUpper}} 年
+                          </template>
+                          <template v-else>
+                            不限
+                          </template>
+                        </span>
                         <span class="location">{{item2.city}}</span>
                         <span class="origin">{{item2.siteName}}</span></div>
                     </div>
