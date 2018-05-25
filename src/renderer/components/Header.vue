@@ -2,6 +2,7 @@
 	<el-col :span="24" class="header">
         <el-col :span="10" class="logo">
             Readhub
+            <sup data-v-7a685ee2="" style="color: red; padding-left: 0.2em; font-size: 14px;">beta</sup>
         </el-col>
 	</el-col>
 </template>
